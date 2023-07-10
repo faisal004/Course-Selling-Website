@@ -6,11 +6,14 @@ import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
+import {useNavigate} from "react-router-dom";
 
 export default function ButtonAppBar() {
+    const navigate = useNavigate()
+  
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static">
+      <AppBar position="static ">
         <Toolbar>
           <IconButton
             size="large"
@@ -26,7 +29,9 @@ export default function ButtonAppBar() {
           </Typography>
           <Button color="inherit">Login</Button>
           
-          <Button color="inherit">Sign Up</Button>
+          <Button color="inherit"  onClick={() => {
+                            navigate("/Signup")
+                        }}>Sign Up</Button>
         </Toolbar>
       </AppBar>
     </Box>
