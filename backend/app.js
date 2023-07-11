@@ -4,14 +4,20 @@ import User from "./models/userModel.js";
 import Course from "./models/courseModel.js";
 import Admin from "./models/adminModel.js";
 import jwt from "jsonwebtoken";
+import cors from "cors"
+import bodyParser from "body-parser";
 
 
+
+const app = express();
 connectDb();
 const SECRET = "SECr3t";
-const app = express();
 app.use(express.json());
+app.use(cors())
+
 const port = 3000;
 
+app.use(bodyParser.json());
 
 
 
@@ -112,7 +118,7 @@ app.post("/users/signup", async (req, res) => {
     } else {
       const newUser = new User({ username, email, password });
       await newUser.save();
-      const token = jwt.sign({ username, role: "user" }, SECRET, {
+      const token = jwt.sign({ email, role: "user" }, SECRET, {
         expiresIn: "1h",
       });
       res.json({ message: "User created successfully", token });
