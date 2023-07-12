@@ -1,9 +1,11 @@
 import TextField from "@mui/material/TextField";
 import Card from "@mui/material/Card";
 import Button from "@mui/material/Button";
-import { Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Signup = () => {
   const navigate = useNavigate();
@@ -40,12 +42,37 @@ const Signup = () => {
         body: JSON.stringify(user),
       });
       let response = await res.json();
-      console.log(response.token);
-      localStorage.setItem("token",response.token)
-      setEmail("");
-      setUsername("");
-      setPassword("");
-      navigate("/Home")
+      console.log(response.message);
+      if (response.message === "User Exists") {
+        toast.warn("User Exists Please Login", {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+        });
+      } else {
+        localStorage.setItem("token", response.token);
+        toast.success("Success", {
+          position: "top-right",
+          autoClose: 2000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+        });
+        setEmail("");
+        setUsername("");
+        setPassword("");
+        setTimeout(() => {
+          navigate("/Home");
+        }, 1000);
+      }
     } catch (error) {
       console.log("Error:", error);
     }
@@ -64,6 +91,7 @@ const Signup = () => {
               name="email"
               variant="outlined"
               onChange={handleChange}
+              required
             />
           </div>
           <div>
@@ -73,6 +101,7 @@ const Signup = () => {
               name="username"
               variant="outlined"
               onChange={handleChange}
+              required
             />
           </div>
           <div>
@@ -83,6 +112,7 @@ const Signup = () => {
               name="password"
               variant="outlined"
               onChange={handleChange}
+              required
             />
           </div>
           <Button type="submit" variant="contained">
@@ -93,6 +123,7 @@ const Signup = () => {
           Already have an account?<Link to={"/Login"}>Login</Link>
         </div>{" "}
       </Card>
+      <ToastContainer />
     </div>
   );
 };
