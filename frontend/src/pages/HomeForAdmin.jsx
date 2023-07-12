@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import MediaCard from "../../utils/Cards";
-import Skeleton from '@mui/material/Skeleton';
+import Skeleton from "@mui/material/Skeleton";
 
 const HomeForAdmin = () => {
   const navigate = useNavigate();
@@ -18,7 +18,7 @@ const HomeForAdmin = () => {
       const res = await fetch("http://localhost:3000/admin/courses");
       const data = await res.json();
       const courses = data.courses;
-      const length=courses.length
+      const length = courses.length;
       console.log(length);
       const published = courses.filter((course) => course.published);
       const nonPublished = courses.filter((course) => !course.published);
@@ -46,22 +46,24 @@ const HomeForAdmin = () => {
       <div className="mt-8 ">
         <h2 className="text-3xl font-bold mb-4">Published Courses</h2>
         <div className="grid md:grid-cols-3 gap-4">
-          {!loading ? (
-            publishedCourses.map((course) => (
-              <MediaCard
-                key={course._id}
-                image={course.imageLink}
-                title={course.title}
-                description={course.description}
-                price={course.price}
-              />
-            ))
-          ) : (
-            publishedCourses.map((length) => (
-              <Skeleton variant="rounded" width={300} height={200} />
-            ))
-         
-          )}
+          {!loading
+            ? publishedCourses.map((course) => (
+                <MediaCard
+                  key={course._id}
+                  image={course.imageLink}
+                  title={course.title}
+                  description={course.description}
+                  price={course.price}
+                />
+              ))
+            : publishedCourses.map((length) => (
+                <Skeleton
+                  key={Math.random()}
+                  variant="rounded"
+                  width={350}
+                  height={200}
+                />
+              ))}
         </div>
       </div>
       <div className="mt-8">

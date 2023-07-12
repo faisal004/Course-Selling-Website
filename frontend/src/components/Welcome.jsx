@@ -40,9 +40,9 @@ const Welcome = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           <div className="flex flex-col items-center">
             <img
-              src="/feature-1.svg"
+              src="https://fastly.picsum.photos/id/331/600/400.jpg?hmac=Ixx2A7u1GYvSOMwwo8pdLcwrximkgqi6CsWI8lVaxKE"
               alt="Feature 1"
-              className="w-24 h-24 mb-4"
+              className="w-72 h-44 mb-4"
             />
             <h3 className="text-xl font-semibold mb-2">Wide Audience Reach</h3>
             <p className="text-gray-500 text-center">
@@ -51,9 +51,9 @@ const Welcome = () => {
           </div>
           <div className="flex flex-col items-center">
             <img
-              src="/feature-2.svg"
+              src="https://fastly.picsum.photos/id/29/600/400.jpg?hmac=FzWIzSBMw0ICpAddZaf-LH4165ao4BcukJRLjLyjAmc"
               alt="Feature 2"
-              className="w-24 h-24 mb-4"
+              className="w-72 h-44 mb-4"
             />
             <h3 className="text-xl font-semibold mb-2">Easy Course Creation</h3>
             <p className="text-gray-500 text-center">
@@ -62,9 +62,9 @@ const Welcome = () => {
           </div>
           <div className="flex flex-col items-center">
             <img
-              src="/feature-3.svg"
+              src="https://fastly.picsum.photos/id/78/600/400.jpg?hmac=0_Z9hzoXh6jHaHPrgAF8_Kwd4MJK57FEpG2-s-ukioI"
               alt="Feature 3"
-              className="w-24 h-24 mb-4"
+              className="w-72 h-44 mb-4"
             />
             <h3 className="text-xl font-semibold mb-2">Secure Payment System</h3>
             <p className="text-gray-500 text-center">
