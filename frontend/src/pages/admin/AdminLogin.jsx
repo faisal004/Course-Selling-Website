@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-const Login = () => {
+const AdminLogin = () => {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
 
@@ -68,7 +68,7 @@ const Login = () => {
         setPassword("");
         setTimeout(() => {
           
-          navigate("/Home");
+          navigate("/HomeForAdmin");
           window.location.reload()
         }, 1000);
       }
@@ -80,7 +80,7 @@ const Login = () => {
   return (
     <div className="flex justify-center mt-10 p-5 ">
       <Card className="space-y-3 p-10">
-        <div>LOG IN</div>
+        <div>LOG IN AS TEACHER</div>
         <form onSubmit={handleSubmit} className="space-y-3">
           <div className="">
             <TextField
@@ -109,7 +109,7 @@ const Login = () => {
           </Button>
         </form>
         <div>
-          Don&apos;t have an account?<Link to={"/Signup"}>Signup</Link>
+          Don&apos;t have an account?<Link to={"/AdminSignup"}>Signup</Link>
         </div>{" "}
       </Card>
       <ToastContainer />
@@ -117,4 +117,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default AdminLogin;

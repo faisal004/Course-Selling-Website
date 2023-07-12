@@ -38,18 +38,25 @@ const authenticateJwt = (req, res, next) => {
 };
 
 app.post("/admin/courses", authenticateJwt, async (req, res) => {
-  const { title, description, price, imageLink, published } = req.body;
+  try {
+    const { title, description, price, imageLink, published } = req.body;
 
-  const course = new Course({
-    title,
-    description,
-    price,
-    imageLink,
-    published,
-  });
-  await course.save();
-  res.json({ message: "Course created successfully", courseId: course.id });
+    const course = new Course({
+      title,
+      description,
+      price,
+      imageLink,
+      published,
+    });
+    await course.save();
+
+    res.json({ message: "Course created successfully", courseId: course.id });
+  } catch (error) {
+    console.error("Error creating course:", error);
+    res.status(500).json({ error: "Failed to create course" });
+  }
 });
+
 app.put("/admin/courses/:courseId", authenticateJwt, async (req, res) => {
   try {
     const course = await Course.findByIdAndUpdate(
@@ -192,9 +199,7 @@ app.get("/users/purchasedCourses", authenticateJwt, async (req, res) => {
 });
 
 
-app.get("/", (req, res) => {
-  res.send("Hello World!");
-});
+
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
