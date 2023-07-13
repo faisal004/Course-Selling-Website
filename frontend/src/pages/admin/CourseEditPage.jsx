@@ -2,9 +2,12 @@ import { useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useNavigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
-const CreateCourse = () => {
+const CourseEditPage = () => {
   const navigate = useNavigate();
+  const { courseId } = useParams();
+
   const [title, settitle] = useState("");
   const [description, setdescription] = useState("");
   const [price, setPrice] = useState("");
@@ -22,8 +25,8 @@ const CreateCourse = () => {
     };
     try {
       const token = localStorage.getItem("token");
-      let res = await fetch("http://localhost:3000/admin/courses", {
-        method: "POST",
+      let res = await fetch("http://localhost:3000/admin/courses/" + courseId, {
+        method: "PUT",
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
@@ -32,7 +35,7 @@ const CreateCourse = () => {
       });
       let response = await res.json();
       console.log(response);
-      if (response.message === "Course created successfully") {
+      if (response.message === "Course updated successfully") {
         toast.success("Success", {
           position: "top-right",
           autoClose: 2000,
@@ -69,12 +72,12 @@ const CreateCourse = () => {
     }
   };
 
-  // console.log("Form submitted!");
-  // console.log("Course Title:", title);
-  // console.log("Course Description:", description);
-  // console.log("Price:", price);
-  // console.log("Image Link:", imageLink);
-  // console.log("Published:", published);
+  //   console.log("Form submitted!");
+  //   console.log("Course Title:", title);
+  //   console.log("Course Description:", description);
+  //   console.log("Price:", price);
+  //   console.log("Image Link:", imageLink);
+  //   console.log("Published:", published);
 
   return (
     <>
@@ -155,12 +158,22 @@ const CreateCourse = () => {
               <span className="ml-2 text-gray-700">Published</span>
             </label>
           </div>
-          <button
-            type="submit"
-            className="bg-blue-500 text-white px-4 py-2 rounded-md"
-          >
-            Create
-          </button>
+          <div className="space-x-3">
+            <button
+              type="submit"
+              className="bg-blue-500 text-white px-4 py-2 rounded-md"
+            >
+              Update
+            </button>
+            <button
+              onClick={() => {
+                navigate("/HomeForAdmin");
+              }}
+              className="bg-blue-500 text-white px-4 py-2 rounded-md"
+            >
+              Cancel
+            </button>
+          </div>
         </form>
         <ToastContainer />
       </div>
@@ -168,4 +181,4 @@ const CreateCourse = () => {
   );
 };
 
-export default CreateCourse;
+export default CourseEditPage;

@@ -54,6 +54,8 @@ const HomeForAdmin = () => {
                   title={course.title}
                   description={course.description}
                   price={course.price}
+                  _id={course._id}
+                  
                 />
               ))
             : publishedCourses.map((length) => (
@@ -76,6 +78,7 @@ const HomeForAdmin = () => {
               title={course.title}
               description={course.description}
               price={course.price}
+              _id={course._id}
             />
           ))}
         </div>

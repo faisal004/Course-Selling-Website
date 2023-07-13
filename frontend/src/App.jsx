@@ -14,6 +14,7 @@ import AdminLogin from "./pages/admin/AdminLogin";
 import HomeForAdmin from "./pages/HomeForAdmin";
 import AdminSignup from "./pages/admin/adminSignup";
 import CreateCourse from "./pages/admin/CreateCourse";
+import CourseEditPage from "./pages/admin/CourseEditPage";
 
 function App() {
   const [user, setUser] = useState(false);
@@ -50,6 +51,7 @@ function App() {
           <Route path="/AdminLogin" element={<AdminLogin />} />
           <Route path="/HomeForAdmin" element={<HomeForAdmin />} />
           <Route path="/HomeForAdmin/CreateCourse" element={<CreateCourse />} />
+          <Route path="/HomeForAdmin/CourseEditPage/:courseId" element={<CourseEditPage  />} />
 
           <Route path="/AdminSignup" element={<AdminSignup />} />
 

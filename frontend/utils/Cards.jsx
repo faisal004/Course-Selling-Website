@@ -5,6 +5,7 @@ import CardMedia from "@mui/material/CardMedia";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import { useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 export default function MediaCard(props) {
   const location = useLocation();
@@ -32,7 +33,10 @@ export default function MediaCard(props) {
       </CardContent>
       <CardActions>
         {isRouteActive("/HomeForAdmin") ? (
-          <Button size="small">Edit</Button>
+          <Link to={`/HomeForAdmin/CourseEditPage/${props._id}`}>
+           <Button size="small">Edit</Button>
+          </Link>
+         
         ) : (
           <Button variant="contained">BUY NOW</Button>
         )}
