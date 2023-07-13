@@ -1,18 +1,23 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
+import { Context } from "../../context/Context";
+import MediaCard from "../../../utils/Cards";
 
 const CourseEditPage = () => {
   const navigate = useNavigate();
+  const { courses } = useContext(Context);
+  console.log(courses);
   const { courseId } = useParams();
+  const course = courses.find((course) => course._id === courseId);
 
-  const [title, settitle] = useState("");
-  const [description, setdescription] = useState("");
-  const [price, setPrice] = useState("");
-  const [imageLink, setImageLink] = useState("");
-  const [published, setIsPublished] = useState(false);
+  const [title, settitle] = useState(course.title);
+  const [description, setdescription] = useState(course.description);
+  const [price, setPrice] = useState(course.price);
+  const [imageLink, setImageLink] = useState(course.imageLink);
+  const [published, setIsPublished] = useState(course.published);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -82,6 +87,15 @@ const CourseEditPage = () => {
   return (
     <>
       <div className="container mt-16 mx-auto p-4">
+        <div className="grid grid-cols-1 gap-1 mb-3 ">
+          <MediaCard
+            title={course.title}
+            description={course.description}
+            image={course.imageLink}
+            price={course.price}
+          />
+        </div>
+
         <h2 className="text-lg font-bold mb-4">Create Course</h2>
         <form onSubmit={handleSubmit}>
           <div className="mb-4">
