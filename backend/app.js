@@ -4,38 +4,21 @@ import User from "./models/userModel.js";
 import Course from "./models/courseModel.js";
 import Admin from "./models/adminModel.js";
 import jwt from "jsonwebtoken";
-import cors from "cors"
+import cors from "cors";
 import bodyParser from "body-parser";
-
+import {authenticateJwt,SECRET }from './middleware/auth.js';
 
 
 const app = express();
+
 connectDb();
-const SECRET = "SECr3t";
+
 app.use(express.json());
-app.use(cors())
+app.use(cors());
 
 const port = 3000;
 
 app.use(bodyParser.json());
-
-
-
-const authenticateJwt = (req, res, next) => {
-  const authHeader = req.headers.authorization;
-  if (authHeader) {
-    const token = authHeader.split(" ")[1];
-    jwt.verify(token, SECRET, (err, user) => {
-      if (err) {
-        return res.sendStatus(403);
-      }
-      req.user = user;
-      next();
-    });
-  } else {
-    res.sendStatus(401);
-  }
-};
 
 app.post("/admin/courses", authenticateJwt, async (req, res) => {
   try {
@@ -164,20 +147,28 @@ app.get("/users/courses", authenticateJwt, async (req, res) => {
 
 app.post("/users/courses/:courseId", authenticateJwt, async (req, res) => {
   try {
-    const course = await Course.findById(req.params.courseId);
-    console.log(course);
-    if (course) {
-      const user = await User.findOne({ email: req.user.email });
-      if (user) {
-        user.purchasedCourses.push(course);
-        await user.save();
-        res.json({ message: "Course purchased successfully" });
-      } else {
-        res.status(403).json({ message: "User not found" });
-      }
-    } else {
-      res.status(404).json({ message: "Course not found" });
+    const courseId = req.params.courseId;
+    const course = await Course.findById(courseId);
+
+    if (!course) {
+      return res.status(404).json({ message: "Course not found" });
     }
+
+    const user = await User.findOne({ email: req.user.email });
+
+    if (!user) {
+      return res.status(403).json({ message: "User not found" });
+    }
+
+    const alreadyBought = user.purchasedCourses.includes(courseId);
+
+    if (alreadyBought) {
+      return res.status(400).json({ message: "Course already purchased" });
+    }
+
+    user.purchasedCourses.push(course);
+    await user.save();
+    res.json({ message: "Course purchased successfully" });
   } catch (error) {
     res.status(500).json({ message: "Internal server error" });
   }
@@ -197,9 +188,6 @@ app.get("/users/purchasedCourses", authenticateJwt, async (req, res) => {
     res.status(500).json({ message: "Internal server error" });
   }
 });
-
-
-
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
