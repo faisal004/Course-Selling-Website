@@ -3,7 +3,7 @@ import { createContext,useEffect,useState } from "react";
 export const Context = createContext();
 
 export const CourseProvider = ({ children }) => {
-    const [courses, setCourses] = useState("");
+    const [courses, setCourses] = useState([]);
     const [publishedCourses, setPublishedCourses] = useState([]);
     const [nonPublishedCourses, setNonPublishedCourses] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -28,7 +28,7 @@ export const CourseProvider = ({ children }) => {
         const data = await res.json();
         const userCourses= data.courses;
   
-        console.log(userCourses);
+      
   
         setUserCourses(userCourses);
       } catch (error) {

@@ -9,15 +9,16 @@ import MediaCard from "../../../utils/Cards";
 const CourseEditPage = () => {
   const navigate = useNavigate();
   const { courses } = useContext(Context);
-  console.log(courses);
+ 
   const { courseId } = useParams();
   const course = courses.find((course) => course._id === courseId);
 
-  const [title, settitle] = useState(course.title);
-  const [description, setdescription] = useState(course.description);
-  const [price, setPrice] = useState(course.price);
-  const [imageLink, setImageLink] = useState(course.imageLink);
-  const [published, setIsPublished] = useState(course.published);
+
+  const [title, settitle] = useState(course?.title || "");
+  const [description, setdescription] = useState(course?.description || "");
+  const [price, setPrice] = useState(course?.price || "");
+  const [imageLink, setImageLink] = useState(course?.imageLink || "");
+  const [published, setIsPublished] = useState(course?.published || false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -86,7 +87,7 @@ const CourseEditPage = () => {
 
   return (
     <>
-      <div className="container mt-16 mx-auto p-4">
+      {course?(<div className="container mt-16 mx-auto p-4">
         <div className="grid grid-cols-1 gap-1 mb-3 ">
           <MediaCard
             title={course.title}
@@ -109,7 +110,7 @@ const CourseEditPage = () => {
               type="text"
               id="title"
               className="border border-gray-300 rounded-md px-4 py-2 w-full"
-              value={title}
+              value={course.title}
               onChange={(e) => settitle(e.target.value)}
               required
             />
@@ -124,7 +125,7 @@ const CourseEditPage = () => {
             <textarea
               id="description"
               className="border border-gray-300 rounded-md px-4 py-2 w-full"
-              value={description}
+              value={course.description}
               onChange={(e) => setdescription(e.target.value)}
               required
             ></textarea>
@@ -140,7 +141,7 @@ const CourseEditPage = () => {
               type="number"
               id="price"
               className="border border-gray-300 rounded-md px-4 py-2 w-full"
-              value={price}
+              value={course.price}
               onChange={(e) => setPrice(e.target.value)}
               required
             />
@@ -156,7 +157,7 @@ const CourseEditPage = () => {
               type="text"
               id="imageLink"
               className="border border-gray-300 rounded-md px-4 py-2 w-full"
-              value={imageLink}
+              value={course.imageLink}
               onChange={(e) => setImageLink(e.target.value)}
               required
             />
@@ -166,7 +167,7 @@ const CourseEditPage = () => {
               <input
                 type="checkbox"
                 className="form-checkbox"
-                checked={published}
+                checked={course.published}
                 onChange={() => setIsPublished(!published)}
               />
               <span className="ml-2 text-gray-700">Published</span>
@@ -190,7 +191,7 @@ const CourseEditPage = () => {
           </div>
         </form>
         <ToastContainer />
-      </div>
+      </div>):"Loading"}
     </>
   );
 };
