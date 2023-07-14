@@ -110,7 +110,7 @@ const CourseEditPage = () => {
               type="text"
               id="title"
               className="border border-gray-300 rounded-md px-4 py-2 w-full"
-              value={course.title}
+              value={title}
               onChange={(e) => settitle(e.target.value)}
               required
             />
@@ -125,7 +125,7 @@ const CourseEditPage = () => {
             <textarea
               id="description"
               className="border border-gray-300 rounded-md px-4 py-2 w-full"
-              value={course.description}
+              value={description}
               onChange={(e) => setdescription(e.target.value)}
               required
             ></textarea>
@@ -141,7 +141,7 @@ const CourseEditPage = () => {
               type="number"
               id="price"
               className="border border-gray-300 rounded-md px-4 py-2 w-full"
-              value={course.price}
+              value={price}
               onChange={(e) => setPrice(e.target.value)}
               required
             />
@@ -157,7 +157,7 @@ const CourseEditPage = () => {
               type="text"
               id="imageLink"
               className="border border-gray-300 rounded-md px-4 py-2 w-full"
-              value={course.imageLink}
+              value={imageLink}
               onChange={(e) => setImageLink(e.target.value)}
               required
             />

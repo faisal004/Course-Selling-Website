@@ -84,12 +84,7 @@ const Welcome = () => {
         <p className="text-lg text-white mb-8">
           Sign up as a teacher today and start sharing your knowledge!
         </p>
-        <a
-          href="/SignupTeacher"
-          className="px-8 py-4 bg-white text-blue-500 hover:bg-blue-600  font-bold rounded-lg transition-all duration-300"
-        >
-          Sign Up as a Teacher
-        </a>
+        
       </div>
     </section>
   </div>
