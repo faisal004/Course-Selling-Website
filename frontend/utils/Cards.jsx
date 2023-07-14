@@ -38,7 +38,10 @@ export default function MediaCard(props) {
           </Link>
          
         ) : (
-          <Button variant="contained">BUY NOW</Button>
+          <Link to={`/Home/buyCourse/${props._id}`}>
+            <Button variant="contained">BUY NOW</Button>
+          </Link>
+        
         )}
       </CardActions>
     </Card>

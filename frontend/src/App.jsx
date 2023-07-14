@@ -15,6 +15,7 @@ import HomeForAdmin from "./pages/HomeForAdmin";
 import AdminSignup from "./pages/admin/adminSignup";
 import CreateCourse from "./pages/admin/CreateCourse";
 import CourseEditPage from "./pages/admin/CourseEditPage";
+import BuyCourse from "./pages/BuyCourse";
 
 
 function App() {
@@ -53,6 +54,7 @@ function App() {
           <Route path="/HomeForAdmin" element={<HomeForAdmin />} />
           <Route path="/HomeForAdmin/CreateCourse" element={<CreateCourse />} />
           <Route path="/HomeForAdmin/CourseEditPage/:courseId" element={<CourseEditPage  />} />
+          <Route path="/Home/buyCourse/:courseId" element={<BuyCourse  />} />
 
           <Route path="/AdminSignup" element={<AdminSignup />} />
 

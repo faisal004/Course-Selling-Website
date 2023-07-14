@@ -1,32 +1,13 @@
-import { useEffect, useState } from "react";
+import { Context } from "../context/Context";
 import MediaCard from "../../utils/Cards";
+import { useContext } from "react";
+
 
 const Home = () => {
-  const [courses, setCourses] = useState([]);
 
-  useEffect(() => {
-    fetchCourses();
-  }, []);
 
-  const fetchCourses = async () => {
-    try {
-      const token = localStorage.getItem("token");
-      const res = await fetch("http://localhost:3000/users/courses", {
-        method: "GET",
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      const data = await res.json();
-      const courses = data.courses;
 
-      console.log(courses);
-
-      setCourses(courses);
-    } catch (error) {
-      console.log("Error:", error);
-    }
-  };
+ const {userCourses} =useContext(Context)
 
   return (
     <div className="bg-gray-100">
@@ -48,13 +29,14 @@ const Home = () => {
           </h2>
 
           <div className="grid md:grid-cols-3 gap-4">
-            {courses.map((course) => (
+            {userCourses.map((course) => (
               <MediaCard
                 key={course._id}
                 image={course.imageLink}
                 title={course.title}
                 description={course.description}
                 price={course.price}
+                _id={course._id}
               />
             ))}
           </div>

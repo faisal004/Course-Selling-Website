@@ -25,7 +25,7 @@ const HomeForAdmin = () => {
       </div>
       <div className="mt-8  ">
         <h2 className="text-3xl font-bold mb-4">Published Courses</h2>
-        <div className="grid md:grid-cols-3  grid-cols-1 gap-4 ">
+        <div className="grid md:grid-cols-3  sm:grid-cols-2 grid-cols-1 gap-4 ">
           
         {    publishedCourses.map((course) => (
                 <MediaCard
@@ -43,7 +43,7 @@ const HomeForAdmin = () => {
       </div>
       <div className="mt-8">
         <h2 className="text-3xl font-bold mb-4">Non-published Courses</h2>
-        <div className="grid md:grid-cols-3 grid-cols-1   gap-4 ">
+        <div className="grid md:grid-cols-3  sm:grid-cols-2 grid-cols-1   gap-4 ">
           {nonPublishedCourses.map((course) => (
             <MediaCard
               key={course._id}
