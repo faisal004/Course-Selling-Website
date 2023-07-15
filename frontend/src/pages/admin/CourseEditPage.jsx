@@ -167,7 +167,7 @@ const CourseEditPage = () => {
               <input
                 type="checkbox"
                 className="form-checkbox"
-                checked={course.published}
+                checked={published}
                 onChange={() => setIsPublished(!published)}
               />
               <span className="ml-2 text-gray-700">Published</span>
