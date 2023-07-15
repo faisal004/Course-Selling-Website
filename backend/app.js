@@ -179,6 +179,7 @@ app.get("/users/purchasedCourses", authenticateJwt, async (req, res) => {
     const user = await User.findOne({ email: req.user.email }).populate(
       "purchasedCourses"
     );
+    console.log(user)
     if (user) {
       res.json({ purchasedCourses: user.purchasedCourses || [] });
     } else {
